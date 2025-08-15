@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if movie %}Edit Movie{% else %}Add Movie{% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>{% if movie %}Edit Movie{% else %}Add Movie{% endif %}</h1>
+        
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">TMDB ID</label>
+                <input type="number" class="form-control" name="tmdb_id" 
+                       value="{{ movie.tmdb_id if movie else '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" 
+                       value="{{ movie.title if movie else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" name="description" rows="3">{{ movie.description if movie else '' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Poster URL</label>
+                <input type="text" class="form-control" name="poster_url" 
+                       value="{{ movie.poster_url if movie else '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Release Date</label>
+                <input type="date" class="form-control" name="release_date" 
+                       value="{{ movie.release_date if movie else '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Original Language</label>
+                <input type="text" class="form-control" name="language" 
+                       value="{{ movie.language if movie else '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Dubbed Language</label>
+                <input type="text" class="form-control" name="dubbed_language" 
+                       value="{{ movie.dubbed_language if movie else '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">720p Video URL</label>
+                <input type="text" class="form-control" name="video_720p" 
+                       value="{{ movie.video_720p if movie else '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">1080p Video URL</label>
+                <input type="text" class="form-control" name="video_1080p" 
+                       value="{{ movie.video_1080p if movie else '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{{ url_for('admin_panel') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
